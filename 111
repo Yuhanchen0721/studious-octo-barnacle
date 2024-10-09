@@ -20,3 +20,22 @@ def ask():
 
 if __name__ == '__main__':
     app.run(debug=True)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伦理学问答</title>
+</head>
+<body>
+    <h1>伦理学问答</h1>
+    <form action="/ask" method="post">
+        <input type="text" name="question" placeholder="请输入您的伦理学问题" required>
+        <button type="submit">提交</button>
+    </form>
+    {% if question %}
+        <h2>问题: {{ question }}</h2>
+        <h3>回答: {{ answer }}</h3>
+    {% endif %}
+</body>
+</html>
