@@ -1,0 +1,22 @@
+from flask import Flask, request, render_template
+import openai
+
+app = Flask(__name__)
+openai.api_key = 'YOUR_OPENAI_API_KEY'  # 请替换为你的API密钥
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/ask', methods=['POST'])
+def ask():
+    user_question = request.form['question']
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": user_question}]
+    )
+    answer = response['choices'][0]['message']['content']
+    return render_template('index.html', question=user_question, answer=answer)
+
+if __name__ == '__main__':
+    app.run(debug=True)
